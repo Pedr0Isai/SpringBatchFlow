@@ -1,0 +1,35 @@
+spring:
+  #Evitar problemas de compatibilidad con Swagger
+  mvc.pathmatch.matching-strategy: ant-path-matcher
+  batch:
+    #Deshabilitamos que se ejecute el job automaticamente al iniciar la aplicación
+    #ya que funciona, pero los jobs y steps no son identificables
+    job:
+      enabled: false
+    #Crea automaticamente las tablas del job repository (tablas de SpringBatch) en la BBDD
+    jdbc:
+      initialize-schema: always
+  jpa:
+    #Crea/actualiza las tablas del package.model en la BBDD de forma automatica
+    hibernate:
+      ddl-auto: create-drop
+    #Se especifica el dialecto sql de la BBDD
+    database-platform: org.hibernate.dialect.H2Dialect
+    #Buscar los scripts .sql en resource
+    defer-datasource-initialization: false
+    #Muestra las sentencias Hibernate SQL ejecutadas por JPA
+    show-sql: false
+  #Se habilita la consola GUI de H2
+  h2.console.enabled: true
+  servlet:
+    multipart:
+      #Habilita que la app reciba archivos
+      enabled: true
+      #Define el tamaño máximo del archivo
+      max-file-size: 10MB
+      #Define el tamaño máximo recibido en el request
+      max-request-size: 10MB
+server:
+  port: 8080
+  servlet:
+    context-path: /springBatchFlow
