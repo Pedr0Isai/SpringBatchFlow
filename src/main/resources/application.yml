@@ -2,10 +2,8 @@ spring:
   #Evitar problemas de compatibilidad con Swagger
   mvc.pathmatch.matching-strategy: ant-path-matcher
   batch:
-    #Deshabilitamos que se ejecute el job automaticamente al iniciar la aplicación
-    #ya que funciona, pero los jobs y steps no son identificables
-    job:
-      enabled: false
+    #Deshabilitamos la autoconfiguración de Spring Batch, ya que lo configuraremos desde la clase BatchConfig
+    job.enabled: false
     #Crea automaticamente las tablas del job repository (tablas de SpringBatch) en la BBDD
     jdbc:
       initialize-schema: always
