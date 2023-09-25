@@ -4,13 +4,19 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(Include.NON_NULL)
 public class ResponseDto implements Serializable {
@@ -28,14 +34,16 @@ public class ResponseDto implements Serializable {
 	protected Map<String, Object> detalles;
 	
 	
-	public ResponseDto() {
-		this.status = 200;
+	public ResponseDto(int status, String path) {
+		this.status = status;
+		this.path = path;
 		this.mensaje = "Operación correcta";
 		this.timestamp = LocalDateTime.now();
 	}
 	
-	public ResponseDto(int result, String mensaje) {
-		this.status = result;
+	public ResponseDto(int status, String path, String mensaje) {
+		this.status = status;
+		this.path = path;
 		this.mensaje = mensaje;
 		this.timestamp = LocalDateTime.now();
 	}

@@ -24,7 +24,7 @@ public class BatchConfig {
 
 	@Autowired
 	private StepBuilderFactory stepBuilder;
-
+	
 	@Bean
 	ValidateAccountTasklet validateAccountTasklet() {
 		return new ValidateAccountTasklet();

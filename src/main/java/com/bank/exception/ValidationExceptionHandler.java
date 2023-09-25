@@ -40,8 +40,7 @@ public class ValidationExceptionHandler {
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ResponseBody
 	public ResponseEntity<ResponseDto> badRequest(MethodArgumentNotValidException ex, HttpServletRequest request) {
-		ResponseDto response = new ResponseDto(HttpStatus.BAD_REQUEST.value(), "Petición incorrecta");
-		response.setPath(request.getRequestURI());
+		ResponseDto response = new ResponseDto(HttpStatus.BAD_REQUEST.value(), request.getRequestURI(), "Petición incorrecta");
 		Map<String, Object> errors = new HashMap<>();
 		ex.getBindingResult().getAllErrors().forEach(error -> {
 			String fieldName = ((FieldError) error).getField();
@@ -51,4 +50,5 @@ public class ValidationExceptionHandler {
 		response.setError(errors);
 		return ResponseEntity.badRequest().body(response);
 	}
+	
 }
